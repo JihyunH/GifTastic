@@ -13,9 +13,11 @@ function populateButtons(searchArray,classToAdd,areaToAddTo){
 		a.attr('data-type',searchArray[i]);
 		a.text(searchArray[i]);
 		$(areaToAddTo).append(a);
+		console.log("test00");
 	}
 }
 
+console.log('test');
 $(document).on('click', '.searchButton', function(){
 	$('#searches').empty();
 	var type = $(this).data('type');
@@ -23,7 +25,7 @@ $(document).on('click', '.searchButton', function(){
 	var queryURL = 'http://api.giphy.com/v1/gifs/search?q='+type+'&api_key=dc6zaTOxFJmzC&limit=10';  //How to know??
 	$.ajax({url:queryURL,method:'GET'})
 		.done(function(response){
-			// console.log(response);
+			console.log(response);
 			 	for(var i=0; i<response.data.length; i++){
 					var searchDiv = $('<div class="search-item">');
 					var rating = response.data[i].rating;
@@ -39,12 +41,14 @@ $(document).on('click', '.searchButton', function(){
 					searchDiv.append(p);
 					searchDiv.append(image);
 					$('#searches').append(searchDiv);
+					console.log('test');
 				}
 		})
 })
 
 $(document).on('click','searchImage',function(){
 	var state = $(this).attr('data-state');
+
 	if(state == 'still'){
 		$(this).attr('src',$(this).data('animated'));
 		$(this).attr('data-state', 'animated');
